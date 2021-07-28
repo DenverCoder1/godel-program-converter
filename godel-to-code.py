@@ -92,8 +92,13 @@ def translate_instruction(instruction_number: int) -> str:
     return code
 
 
+# translate program encoding to code
+def translate_program(program_number: int) -> str:
+    godel_number = program_number + 1
+    instructions = godel_number_to_sequence(godel_number)
+    return "\n".join(translate_instruction(i) for i in instructions)
+
+
 if __name__ == "__main__":
     program_number = int(input("Enter program number: "))
-    instructions = godel_number_to_sequence(program_number + 1)
-    for instruction in instructions:
-        print(translate_instruction(instruction))
+    print(translate_program(program_number))
