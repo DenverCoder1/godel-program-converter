@@ -95,5 +95,5 @@ def translate_instruction(instruction_number: int) -> str:
 if __name__ == "__main__":
     program_number = 25724
     instructions = godel_number_to_sequence(program_number + 1)
-    for instruction in range(10):
+    for instruction in instructions:
         print(translate_instruction(instruction))
