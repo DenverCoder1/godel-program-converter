@@ -6,7 +6,7 @@ Program to convert a program encoding based on its Gödel number to 𝒮 Languag
 
 Launch the program with the following command:
 
-`python3 godel-to-code.py`
+`python3 main.py`
 
 (The command for Python may be different on your system.  See the [Python documentation](https://docs.python.org/3/using/index.html) for details.)
 

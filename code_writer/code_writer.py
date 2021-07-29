@@ -1,27 +1,6 @@
-from typing import Generator, List, Tuple
+from typing import List, Tuple
 
-# generator for prime numbers
-def prime_generator() -> Generator[int, None, None]:
-	yield 2
-	n = 3
-	while True:
-		if is_prime(n):
-			yield n
-		n += 2
-
-
-# check if a number is a prime number
-def is_prime(n: int) -> bool:
-	if n < 2:
-		return False
-	if n == 2:
-		return True
-	if n % 2 == 0:
-		return False
-	for i in range(3, int(n ** 0.5) + 1, 2):
-		if n % i == 0:
-			return False
-	return True
+from primes.primes import prime_generator
 
 
 # calculate the sequence numbers given the godel number
@@ -97,8 +76,3 @@ def translate_program(program_number: int) -> str:
 	godel_number = program_number + 1
 	instructions = godel_number_to_sequence(godel_number)
 	return "\n".join(translate_instruction(i) for i in instructions)
-
-
-if __name__ == "__main__":
-	program_number = int(input("Enter program number: "))
-	print(translate_program(program_number))
