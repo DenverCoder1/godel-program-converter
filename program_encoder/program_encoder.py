@@ -1,8 +1,10 @@
 from typing import Generator, Tuple
 
-from .constants import NOOP_REGEX, ADD_REGEX, MINUS_REGEX, GOTO_REGEX
-from primes import prime_generator
 from godel_utils import encode_pair
+from primes import prime_generator
+
+from .constants import ADD_REGEX, GOTO_REGEX, MINUS_REGEX, NOOP_REGEX
+
 
 def encode_label(label: str) -> int:
 	"""Encodes a label into a number"""

@@ -1,13 +1,13 @@
 import re
 
 # label regex for line label or goto target
-GENERIC_LABEL = r"[A-E]\d*"
+LABEL = r"[A-E]\d*"
 
 # label group in square brackets
-LINE_LABEL = fr"(?:\[(?P<LABEL>{GENERIC_LABEL})\])"
+LINE_LABEL = fr"(?:\[(?P<LABEL>{LABEL})\])"
 
 # label group for goto target
-TARGET_LABEL = fr"(?P<TARGET>{GENERIC_LABEL})"
+TARGET_LABEL = fr"(?P<TARGET>{LABEL})"
 
 # variable group
 VAR = r"(?P<VAR>(Y|[XZ]\d*))"
