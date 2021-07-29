@@ -1,5 +1,6 @@
 from godel_utils import get_left_right, godel_number_to_sequence
 
+
 def get_label(label_number: int) -> str:
 	"""get label from number"""
 	if label_number == 0:

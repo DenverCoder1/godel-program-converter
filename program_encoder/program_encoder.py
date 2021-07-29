@@ -6,22 +6,22 @@ from godel_utils import encode_pair
 
 # NOOP - groups: LABEL, VAR
 NOOP_REGEX = re.compile(
-	r"^\s*(?P<LABEL>\[[A-E]\d*\])?\s*(?P<VAR>(Y|[XZ]\d+))\s*(?:←|<-?|<?=)\s*(?P=VAR)\s*$"
+	r"^\s*(?:\[(?P<LABEL>[A-E]\d*)\])?\s*(?P<VAR>(Y|[XZ]\d*))\s*(?:←|<-?|<?=)\s*(?P=VAR)\s*$"
 )
 
 # ADD - groups: LABEL, VAR
 ADD_REGEX = re.compile(
-	r"^\s*(?P<LABEL>\[[A-E]\d*\])?\s*(?P<VAR>(Y|[XZ]\d+))\s*(?:←|<-?|<?=)\s*(?P=VAR)\s*[+]\s*1\s*$"
+	r"^\s*(?:\[(?P<LABEL>[A-E]\d*)\])?\s*(?P<VAR>(Y|[XZ]\d*))\s*(?:←|<-?|<?=)\s*(?P=VAR)\s*[+]\s*1\s*$"
 )
 
 # MINUS - groups: LABEL, VAR
 MINUS_REGEX = re.compile(
-	r"^\s*(?P<LABEL>\[[A-E]\d*\])?\s*(?P<VAR>(Y|[XZ]\d+))\s*(?:←|<-?|<?=)\s*(?P=VAR)\s*[-∸−]\s*1\s*$"
+	r"^\s*(?:\[(?P<LABEL>[A-E]\d*)\])?\s*(?P<VAR>(Y|[XZ]\d*))\s*(?:←|<-?|<?=)\s*(?P=VAR)\s*[-∸−]\s*1\s*$"
 )
 
 # GOTO - groups: LABEL, VAR, TARGET
 GOTO_REGEX = re.compile(
-	r"^\s*(?P<LABEL>\[[A-E]\d*\])?\s*(?:IF|If|if)\s*(?P<VAR>(Y|[XZ]\d+))\s*(?:≠|!=|=/=)\s*[0],?\s+GOTO\s*(?P<TARGET>\[[A-E]\d*\])\s*$"
+	r"^\s*(?:\[(?P<LABEL>[A-E]\d*)\])?\s*(?:IF|If|if)\s+(?P<VAR>(Y|[XZ]\d*))\s*(?:≠|!=|=/=)\s*[0],?\s+GOTO\s+(?P<TARGET>[A-E]\d*)\s*$"
 )
 
 
@@ -78,6 +78,7 @@ def encode_program_as_sequence(program: str) -> Generator[int, None, None]:
 	"""Encodes a program into a sequence of numbers"""
 	return (encode_instruction(instruction) for instruction in program.split("\n"))
 
+
 def sequence_to_godel_number(sequence: Generator[int, None, None]) -> int:
 	"""Converts a sequence of numbers into a Godel number"""
 	product = 1
@@ -88,6 +89,9 @@ def sequence_to_godel_number(sequence: Generator[int, None, None]) -> int:
 			break
 	return product
 
+
 def encode_program_as_number(program: str) -> int:
 	"""Encodes a program into a program number"""
+	if not program:
+		return 0
 	return sequence_to_godel_number(encode_program_as_sequence(program)) + 1

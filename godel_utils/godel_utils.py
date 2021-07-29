@@ -2,6 +2,7 @@ from typing import List, Tuple
 
 from primes import prime_generator
 
+
 def godel_number_to_sequence(godel_number: int) -> List[int]:
 	"""calculate the sequence numbers given the godel number"""
 	code = []

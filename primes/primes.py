@@ -1,4 +1,3 @@
-# generator for prime numbers
 from typing import Generator
 
 
