@@ -59,7 +59,7 @@ Note:
 ### Examples
 
 ```
-Enter program:
+Enter program (press enter twice to submit):
 
 Program number: 0
 ```
