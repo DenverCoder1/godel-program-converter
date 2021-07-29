@@ -1,29 +1,8 @@
-import re
 from typing import Generator, Tuple
 
+from .constants import NOOP_REGEX, ADD_REGEX, MINUS_REGEX, GOTO_REGEX
 from primes import prime_generator
 from godel_utils import encode_pair
-
-# NOOP - groups: LABEL, VAR
-NOOP_REGEX = re.compile(
-	r"^\s*(?:\[(?P<LABEL>[A-E]\d*)\])?\s*(?P<VAR>(Y|[XZ]\d*))\s*(?:←|<-?|<?=)\s*(?P=VAR)\s*$"
-)
-
-# ADD - groups: LABEL, VAR
-ADD_REGEX = re.compile(
-	r"^\s*(?:\[(?P<LABEL>[A-E]\d*)\])?\s*(?P<VAR>(Y|[XZ]\d*))\s*(?:←|<-?|<?=)\s*(?P=VAR)\s*[+]\s*1\s*$"
-)
-
-# MINUS - groups: LABEL, VAR
-MINUS_REGEX = re.compile(
-	r"^\s*(?:\[(?P<LABEL>[A-E]\d*)\])?\s*(?P<VAR>(Y|[XZ]\d*))\s*(?:←|<-?|<?=)\s*(?P=VAR)\s*[-∸−]\s*1\s*$"
-)
-
-# GOTO - groups: LABEL, VAR, TARGET
-GOTO_REGEX = re.compile(
-	r"^\s*(?:\[(?P<LABEL>[A-E]\d*)\])?\s*(?:IF|If|if)\s+(?P<VAR>(Y|[XZ]\d*))\s*(?:≠|!=|=/=)\s*[0],?\s+GOTO\s+(?P<TARGET>[A-E]\d*)\s*$"
-)
-
 
 def encode_label(label: str) -> int:
 	"""Encodes a label into a number"""
@@ -46,26 +25,24 @@ def encode_var(variable: str) -> int:
 def convert_instruction(instruction: str) -> Tuple[int, int, int]:
 	"""Determine the a, b, and c values for a given instruction as a string"""
 	# NOOP
-	match = NOOP_REGEX.match(instruction)
-	if match:
-		return encode_label(match.group("LABEL")), 0, encode_var(match.group("VAR")) - 1
+	if match := NOOP_REGEX.match(instruction):
+		instruction_type = 0
 	# ADD
-	match = ADD_REGEX.match(instruction)
-	if match:
-		return encode_label(match.group("LABEL")), 1, encode_var(match.group("VAR")) - 1
+	elif match := ADD_REGEX.match(instruction):
+		instruction_type = 1
 	# MINUS
-	match = MINUS_REGEX.match(instruction)
-	if match:
-		return encode_label(match.group("LABEL")), 2, encode_var(match.group("VAR")) - 1
+	elif match := MINUS_REGEX.match(instruction):
+		instruction_type = 2
 	# GOTO
-	match = GOTO_REGEX.match(instruction)
-	if match:
-		return (
-			encode_label(match.group("LABEL")),
-			encode_label(match.group("TARGET")) + 2,
-			encode_var(match.group("VAR")) - 1,
-		)
-	raise ValueError(f"Unrecognized instruction: {instruction}")
+	elif match := GOTO_REGEX.match(instruction):
+		instruction_type = encode_label(match.group("TARGET")) + 2
+	# No match
+	else:
+		raise ValueError(f"Unrecognized instruction: {instruction}")
+	# get a and c from the label and variable capture groups
+	label = encode_label(match.group("LABEL"))
+	variable = encode_var(match.group("VAR")) - 1
+	return label, instruction_type, variable
 
 
 def encode_instruction(instruction: str) -> int:
