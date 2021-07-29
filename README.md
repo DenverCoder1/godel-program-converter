@@ -1,11 +1,12 @@
 # godel-program-converter
 
-Program to convert a program encoding based on its Gödel number to 𝒮 Language (S Language) or convert an 𝒮 Language program to it's program number.
+Program to convert a program encoding based on its Gödel number to 𝒮 Language (S Language) or convert an 𝒮 Language program to it's program number
 
 - [Convert a program number to code](#convert-a-program-number-to-code)
   - [Examples](#examples)
 - [Convert code to a program number](#convert-code-to-a-program-number)
   - [Examples](#examples-1)
+- [See also](#see-also)
 
 ## Convert a program number to code
 
@@ -81,3 +82,8 @@ Y <- Y + 1
 
 Program number: 773094113279999999999999
 ```
+
+## See also
+
+  * [S-interpreter](https://github.com/abrahammurciano/s-interpreter) by @abrahammurciano
+
