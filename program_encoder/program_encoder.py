@@ -92,6 +92,7 @@ def sequence_to_godel_number(sequence: Generator[int, None, None]) -> int:
 
 def encode_program_as_number(program: str) -> int:
 	"""Encodes a program into a program number"""
-	if not program:
+	trimmed_program = program.strip()
+	if not trimmed_program:
 		return 0
-	return sequence_to_godel_number(encode_program_as_sequence(program)) + 1
+	return sequence_to_godel_number(encode_program_as_sequence(trimmed_program)) - 1
