@@ -85,5 +85,5 @@ Program number: 773094113279999999999999
 
 ## See also
 
-  * [S-interpreter](https://github.com/abrahammurciano/s-interpreter) by @abrahammurciano
+  * [S-interpreter](https://github.com/abrahammurciano/s-interpreter) by https://github.com/abrahammurciano
 
