@@ -56,7 +56,7 @@ def get_label(label_number: int) -> str:
     if label_number == 0:
         return ""
     letter = {0: "A", 1: "B", 2: "C", 3: "D", 4: "E"}[(label_number - 1) % 5]
-    number = label_number // 5 + 1
+    number = (label_number - 1) // 5 + 1
     return "[" + letter + str(number) + "] "
 
 
