@@ -66,7 +66,7 @@ def get_instruction_type(type: int) -> str:
     if type > 2:
         return f"IF V≠0 GOTO {get_label(type - 2)}"
     # other instructions
-    return {0: "V ← V", 1: "V ← V + 1", 2: "V ← V ∸ 1"}[type]
+    return {0: "V ← V", 1: "V ← V + 1", 2: "V ← V - 1"}[type]
 
 
 # get variable name from number
