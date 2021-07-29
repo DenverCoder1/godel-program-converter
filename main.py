@@ -1,4 +1,4 @@
-from code_writer.code_writer import translate_program
+from code_writer import translate_program
 
 if __name__ == "__main__":
 	program_number = int(input("Enter program number: "))

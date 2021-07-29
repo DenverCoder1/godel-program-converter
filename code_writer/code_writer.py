@@ -1,37 +1,7 @@
-from typing import List, Tuple
+from godel_utils import get_left_right, godel_number_to_sequence
 
-from primes.primes import prime_generator
-
-
-# calculate the sequence numbers given the godel number
-def godel_number_to_sequence(godel_number: int) -> List[int]:
-	code = []
-	for prime in prime_generator():
-		if godel_number <= 1:
-			break
-		instruction = 0
-		while godel_number % prime == 0:
-			instruction += 1
-			godel_number = godel_number / prime
-		code.append(instruction)
-	return code
-
-
-# encode a pair of numbers
-def encode_pair(x: int, y: int) -> int:
-	return 2 ** x * (2 * y + 1) - 1
-
-
-# return left and right given a pair encoding
-def get_left_right(pair_number: int) -> Tuple[int, int]:
-	for x in range(pair_number + 1):
-		for y in range(pair_number + 1):
-			if encode_pair(x, y) == pair_number:
-				return x, y
-
-
-# get label from number
 def get_label(label_number: int) -> str:
+	"""get label from number"""
 	if label_number == 0:
 		return ""
 	letter = {0: "A", 1: "B", 2: "C", 3: "D", 4: "E"}[(label_number - 1) % 5]
@@ -39,8 +9,8 @@ def get_label(label_number: int) -> str:
 	return "[" + letter + str(number) + "] "
 
 
-# get instruction type
 def get_instruction_type(type: int) -> str:
+	"""get instruction type from number"""
 	# branching
 	if type > 2:
 		return f"IF V≠0 GOTO {get_label(type - 2)}"
@@ -48,8 +18,8 @@ def get_instruction_type(type: int) -> str:
 	return {0: "V ← V", 1: "V ← V + 1", 2: "V ← V - 1"}[type]
 
 
-# get variable name from number
 def get_variable(variable_number: int) -> str:
+	"""get variable name from number"""
 	if variable_number == 1:
 		return "Y"
 	letter = "X" if variable_number % 2 == 0 else "Z"
@@ -57,8 +27,8 @@ def get_variable(variable_number: int) -> str:
 	return letter + str(number)
 
 
-# translate instruction encoding to code
 def translate_instruction(instruction_number: int) -> str:
+	"""translate instruction number to code"""
 	code = ""
 	a, bc = get_left_right(instruction_number)
 	b, c = get_left_right(bc)
@@ -71,8 +41,8 @@ def translate_instruction(instruction_number: int) -> str:
 	return code
 
 
-# translate program encoding to code
 def translate_program(program_number: int) -> str:
+	"""translate program number to code"""
 	godel_number = program_number + 1
 	instructions = godel_number_to_sequence(godel_number)
 	return "\n".join(translate_instruction(i) for i in instructions)
