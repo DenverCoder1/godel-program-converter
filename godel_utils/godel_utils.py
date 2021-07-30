@@ -22,9 +22,13 @@ def encode_pair(x: int, y: int) -> int:
 	return 2 ** x * (2 * y + 1) - 1
 
 
-def get_left_right(pair_number: int) -> Tuple[int, int]:
-	"""return left and right given a pair encoding"""
-	for x in range(pair_number + 1):
-		for y in range(pair_number + 1):
-			if encode_pair(x, y) == pair_number:
-				return x, y
+def decode_pair(z: int) -> Tuple[int, int]:
+	"""Return left and right given a pair encoding"""
+	x, y = 0, z
+	# divide y by 2 until it is even
+	while y % 2 != 0:
+		x += 1
+		y = y // 2
+	# x is the power of 2
+	# y is half of the remaining even number
+	return x, y // 2
