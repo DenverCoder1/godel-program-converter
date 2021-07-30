@@ -1,6 +1,6 @@
 # godel-program-converter
 
-Program to convert a program encoding based on its Gödel number to 𝒮 Language (S Language) or convert an 𝒮 Language program to it's program number
+Program to convert a program encoding based on its Gödel number to 𝒮 Language (S Language) or convert an 𝒮 Language program to its program number
 
 - [Convert a program number to code](#convert-a-program-number-to-code)
   - [Examples](#examples)

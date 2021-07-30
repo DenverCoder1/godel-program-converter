@@ -12,7 +12,7 @@ def prime_generator() -> Generator[int, None, None]:
 
 
 def is_prime(n: int) -> bool:
-	"""check if a number is a prime number"""
+	"""Check whether or not a number is a prime number"""
 	if n < 2:
 		return False
 	if n == 2:
