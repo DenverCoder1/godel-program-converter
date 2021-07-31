@@ -77,10 +77,11 @@ Single line:
 
 Multiline:
 
-```
+```bash
 python3 code_to_godel.py <<EOF
 Y <- Y
 Y <- Y + 1
+EOF
 ```
 
 #### Method 3: Interactive input
