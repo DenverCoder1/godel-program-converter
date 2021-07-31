@@ -1,6 +1,6 @@
 import sys
 
-from code_writer import translate_program
+from decode_number import decode_number_as_code
 
 
 def main():
@@ -12,7 +12,7 @@ def main():
 		# prompt user for input
 		program_number = int(input("Enter a program number: "))
 	# decode the number and print the code
-	print(translate_program(program_number))
+	print(decode_number_as_code(program_number))
 
 
 if __name__ == "__main__":
