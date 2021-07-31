@@ -78,7 +78,7 @@ def translate_instruction(instruction_number: int) -> str:
 	return code
 
 
-def translate_program(program_number: int) -> str:
+def decode_number_as_code(program_number: int) -> str:
 	"""
 	Translate program number to code
 

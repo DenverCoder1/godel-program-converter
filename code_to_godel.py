@@ -1,7 +1,7 @@
 import sys
 import os
 
-from program_encoder import encode_program_as_number
+from encode_program import encode_program_as_number
 
 
 def read_program() -> str:
