@@ -9,6 +9,7 @@ Program to convert a program encoding based on its Gödel number to 𝒮 Languag
   - [Running the code](#running-the-code-1)
   - [How to input code](#how-to-input-code)
   - [Examples](#examples-1)
+- [Development](#development)
 - [See also](#see-also)
 
 ## Convert a program number to code
@@ -19,9 +20,9 @@ Program to convert a program encoding based on its Gödel number to 𝒮 Languag
 
 Launch the program, providing the number as a command line argument:
 
-`python3 godel_to_code.py [program number]`
+`py -m src.godel_to_code [program number]`
 
-For example: `python3 godel_to_code.py 52`
+For example: `py -m src.godel_to_code 52`
 
 (The command for Python may be different on your system.  See the [Python documentation](https://docs.python.org/3/using/index.html) for details.)
 
@@ -29,7 +30,7 @@ For example: `python3 godel_to_code.py 52`
 
 Launch the program with the following command:
 
-`python3 code_to_godel.py`
+`py -m src.godel_to_code`
 
 Enter a program number when prompted.
 
@@ -63,7 +64,7 @@ Enter program number: 2097151
 
 Launch the program with the following command:
 
-`python3 code_to_godel.py test.s`
+`py -m src.code_to_godel test.s`
 
 Where `test.s` is the name of the file containing the program.
 
@@ -73,12 +74,12 @@ Launch the program with the code input as a command line argument:
 
 Single line:
 
-`python3 code_to_godel.py "Y <- Y + 1"`
+`py -m src.code_to_godel "Y <- Y + 1"`
 
 Multiline:
 
 ```bash
-python3 code_to_godel.py <<EOF
+py -m src.code_to_godel <<EOF
 Y <- Y
 Y <- Y + 1
 EOF
@@ -88,7 +89,7 @@ EOF
 
 Launch the program with the following command:
 
-`python3 code_to_godel.py`
+`py -m src.code_to_godel`
 
 Enter the code line by line when prompted. Enter a blank line to end the input.
 
@@ -128,6 +129,16 @@ Y <- Y + 1
 
 Program number: 773094113279999999999999
 ```
+
+## Development
+
+Command to run tests:
+
+``tox``
+
+Command to lint with flake8:
+
+``py setup.py lint``
 
 ## See also
 

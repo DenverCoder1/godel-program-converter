@@ -1,7 +1,7 @@
-from godel_utils import decode_pair, godel_number_to_sequence
+from src.godel_utils import decode_pair, godel_number_to_sequence
 
 
-def get_label(label_number: int) -> str:
+def translate_label(label_number: int) -> str:
 	"""
 	Get label from number
 
@@ -19,11 +19,17 @@ def get_label(label_number: int) -> str:
 	letter = chr((label_number - 1) % 5 + ord("A"))
 	# get the index number of the label
 	number = (label_number - 1) // 5 + 1
-	# wrap label in brackets
-	return "[" + letter + str(number) + "] "
+	# return label name
+	return letter + str(number)
 
 
-def get_instruction_type(type: int) -> str:
+def translate_line_label(label_number: int) -> str:
+	"""Translate the label number and wrap it in brackets if it is not empty"""
+	label = translate_label(label_number)
+	return f"[{label}] " if label else ""
+
+
+def translate_instruction_type(type: int) -> str:
 	"""
 	Get instruction type from number
 
@@ -34,12 +40,12 @@ def get_instruction_type(type: int) -> str:
 	"""
 	# branching
 	if type > 2:
-		return f"IF V≠0 GOTO {get_label(type - 2)}"
+		return f"IF V≠0 GOTO {translate_label(type - 2)}"
 	# other instructions
 	return {0: "V ← V", 1: "V ← V + 1", 2: "V ← V - 1"}[type]
 
 
-def get_variable(variable_number: int) -> str:
+def translate_variable(variable_number: int) -> str:
 	"""
 	Get variable name from its number
 
@@ -69,11 +75,11 @@ def translate_instruction(instruction_number: int) -> str:
 	a, bc = decode_pair(instruction_number)
 	b, c = decode_pair(bc)
 	# translate the label
-	code += get_label(a)
+	code += translate_line_label(a)
 	# translate the instruction type
-	code += get_instruction_type(b)
+	code += translate_instruction_type(b)
 	# replace all occurrences the variable
-	code = code.replace("V", get_variable(c + 1))
+	code = code.replace("V", translate_variable(c + 1))
 	# return the translated instruction
 	return code
 

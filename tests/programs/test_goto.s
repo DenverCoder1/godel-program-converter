@@ -1,0 +1,2 @@
+[A1] IF Y≠0 GOTO B1
+[A1] IF Y≠0 GOTO A1

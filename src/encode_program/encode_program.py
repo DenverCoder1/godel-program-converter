@@ -1,6 +1,6 @@
 from typing import Generator, Tuple
 
-from godel_utils import encode_pair, sequence_to_godel_number
+from src.godel_utils import encode_pair, sequence_to_godel_number
 
 from .constants import ADD_REGEX, GOTO_REGEX, MINUS_REGEX, NOOP_REGEX
 
