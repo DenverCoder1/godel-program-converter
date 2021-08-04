@@ -1,6 +1,6 @@
 import sys
 
-from decode_number import decode_number_as_code
+from .decode_number import decode_number_as_code
 
 
 def main():
