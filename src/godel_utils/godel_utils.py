@@ -1,4 +1,4 @@
-from typing import Generator
+from typing import Generator, Tuple
 
 from src.primes import prime_generator
 
@@ -20,7 +20,7 @@ def sequence_to_godel_number(sequence: Generator[int, None, None]) -> int:
 	return product
 
 
-def godel_number_to_sequence(godel_number: int) -> tuple[int]:
+def godel_number_to_sequence(godel_number: int) -> Tuple[int]:
 	"""Calculate the sequence numbers given the Gödel number"""
 	code = []
 	for prime in prime_generator():
@@ -41,7 +41,7 @@ def encode_pair(x: int, y: int) -> int:
 	return 2 ** x * (2 * y + 1) - 1
 
 
-def decode_pair(z: int) -> tuple[int, int]:
+def decode_pair(z: int) -> Tuple[int, int]:
 	"""Return left and right given a pair encoding"""
 	x, y = 0, z
 	# divide y by 2 until it is even
