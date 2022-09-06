@@ -3,9 +3,9 @@ from src.godel_utils import decode_pair, godel_number_to_sequence
 
 def translate_label(label_number: int) -> str:
 	"""
-	Get label from number
+	Get a label from its number
 
-	If the number is 0, there is no label.
+	If the number is 0, there is no label and the empty string is returned
 
 	Othewise, the number is the index in the sequence:
 
@@ -31,7 +31,7 @@ def translate_line_label(label_number: int) -> str:
 
 def translate_instruction_type(type: int) -> str:
 	"""
-	Get instruction type from number
+	Get an instruction type from its number
 
 	- type = 0: NOOP
 	- type = 1: ADD
@@ -47,7 +47,7 @@ def translate_instruction_type(type: int) -> str:
 
 def translate_variable(variable_number: int) -> str:
 	"""
-	Get variable name from its number
+	Get a variable name from its number
 
 	Variable numbers represent the index in the following sequence:
 	```
@@ -86,7 +86,7 @@ def translate_instruction(instruction_number: int) -> str:
 
 def decode_number_as_code(program_number: int) -> str:
 	"""
-	Translate program number to code
+	Translate a program number to code
 
 	First, 1 is added to the program number to get the Gödel number
 

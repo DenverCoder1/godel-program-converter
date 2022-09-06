@@ -9,15 +9,15 @@ def encode_label(label: str) -> int:
 	"""
 	Encodes a label into a number
 
-	If there is no label, the number is 0.
+	If there is no label, the number is 0
 
-	Othewise, the number is the index in the sequence:
+	Otherwise, the number is the index in the sequence:
 
 	```
 	A1, B1, C1, D1, E1, A2, B2, C2, ...
 	```
 
-	A, B, C, D, E are interpretted as A1, B1, C1, D1, E1, respectively.
+	A, B, C, D, E are interpretted as A1, B1, C1, D1, E1 respectively
 	"""
 	if not label:
 		return 0
@@ -31,7 +31,7 @@ def encode_label(label: str) -> int:
 
 def encode_var(variable: str) -> int:
 	"""
-	Encodes a label into a number
+	Encodes a variable into a number
 
 	Returns the index of the variable in the sequence:
 
@@ -39,7 +39,7 @@ def encode_var(variable: str) -> int:
 	Y, X1, Z1, X2, Z2, X3, Z3, ...
 	```
 
-	X and Z are interpretted as X1 and Z1, respectively.
+	X and Z are interpretted as X1 and Z1 respectively
 	"""
 	if variable == "Y":
 		return 1
@@ -50,7 +50,7 @@ def encode_var(variable: str) -> int:
 
 def convert_instruction(instruction: str) -> Tuple[int, int, int]:
 	"""
-	Determine the a, b, and c values for a given instruction as a string
+	Determines the a, b, and c values for a given instruction as a string
 
 	a = 0 for unlabeled instructions, otherwise a = #(L) where L is the instruction label
 
@@ -62,6 +62,8 @@ def convert_instruction(instruction: str) -> Tuple[int, int, int]:
 	- GOTO: b = #(L) + 2 where L is the target label
 
 	c = #(V) - 1 where V is the variable in the instruction
+
+	Raises ValueError if the instruction is invalid
 	"""
 	# NOOP
 	if match := NOOP_REGEX.match(instruction):
